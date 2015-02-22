@@ -34,7 +34,8 @@ public class GUI extends JFrame {
 					 cellButton = new JButton("-");
 					
 				}
-				cellButton.setBackground(Color.YELLOW);
+				cellButton.setBackground(Color.BLACK);
+				cellButton.setForeground(Color.GREEN);
 				gridPanel.add(cellButton);
 				cellButton.addActionListener(new CellButtonListener(cellButton, cellGrid.getGrid()[i][j]));
 			}
@@ -46,6 +47,7 @@ public class GUI extends JFrame {
 		startButton.addActionListener(new StartButtonListener());
 		controlPanel = new JPanel(new FlowLayout());
 		controlPanel.add(startButton);
+		controlPanel.setBackground(Color.WHITE);
 		add(controlPanel, BorderLayout.SOUTH);
 		
 		//
