@@ -110,6 +110,12 @@ public class CellGrid {
 		return neighbors;
 	}
 	
+	public static void main(String[] args) {
+		/*
+		 * FOR TESTING PURPOSES ONLY
+		 */
+		CellGrid grid = new CellGrid();
+	}
 	 
 
 }
