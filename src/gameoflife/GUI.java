@@ -16,6 +16,7 @@ public class GUI extends JFrame {
 	private JPanel controlPanel; //panel for controlling the game, such as starting and stopping the simulation
 	private JPanel gridPanel; //panel for the cell grid, main contentpane should be border layout so it can accommodate both panels
 	private JButton startButton;
+	private boolean isRunning; //keeps track of whether simulation is or isn't running, and sets button behavior to begin or end it accordingly
 	
 	public GUI() {
 		cellGrid = new CellGrid();
@@ -64,7 +65,7 @@ public class GUI extends JFrame {
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(cell.isAlive()) { //uninitialize cell if cell is alive and user clicks on it during pre-game initialization
+			if(cell.isAlive()) { //Uninitialize cell if cell is alive and user clicks on it during pre-game initialization
 				cell.setAlive(false);
 				cellButton.setText("-");
 			}
@@ -79,7 +80,6 @@ public class GUI extends JFrame {
 	}
 	
 	private class StartButtonListener implements ActionListener{
-		private boolean isRunning; //keeps track of whether simulation is or isn't running, and sets behavior to begin or end it accordingly
 
 		private StartButtonListener() {
 			isRunning = false;
@@ -89,12 +89,11 @@ public class GUI extends JFrame {
 			if(!isRunning) {
 				isRunning = true;
 				startButton.setText("Stop");
-				startSimulation();
 			}
 			else {
 				isRunning = false;
 				startButton.setText("Start");
-				endSimulation();
+				
 			}
 			
 		}
@@ -103,11 +102,15 @@ public class GUI extends JFrame {
 	
 	public void startSimulation() {
 		/* Starts the simulation */
+		while(true) {
+			System.out.println("Started simulation");
+		}
 		
 	}
 	
 	public void endSimulation() {
 		/* Ends the simulation */
+		System.out.println("Ended Simluation");
 	}
 	
 	public static void main(String[] args) {
