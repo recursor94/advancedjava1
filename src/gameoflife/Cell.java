@@ -16,6 +16,16 @@ public class Cell {
 		this.isAlive = isAlive;
 	}
 	
+	@Override
+	public String toString() {
+		if(isAlive) {
+			return "Is alive";
+		}
+		else {
+			return "Is dead";
+		}
+	}
+	
 	
 	
 	

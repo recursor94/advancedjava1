@@ -120,7 +120,7 @@ public class CellGrid {
 		 */
 		return grid[rowIndex][columnIndex];
 	}
-	
+		
 	public static void main(String[] args) {
 		/*
 		 * FOR TESTING PURPOSES ONLY
@@ -132,7 +132,11 @@ public class CellGrid {
 		cell = grid.getCell(21, 3);
 		System.out.println("(21, 3) "+ grid.getIndexOfCell(cell)[0]+ ", " + grid.getIndexOfCell(cell)[1]);
 		
+	
 
+		//
+		//tests for getNeighbors method
+		
 		//
 		
 	}
