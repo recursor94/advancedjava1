@@ -1,5 +1,6 @@
 package gameoflife;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -13,11 +14,12 @@ import javax.swing.JPanel;
 public class GUI extends JFrame {
 	private CellGrid cellGrid;
 	private JPanel controlPanel; //panel for controlling the game, such as starting and stopping the simulation
+	private JPanel gridPanel; //panel for the cell grid, main contentpane should be border layout so it can accommodate both panels
 	private JButton startButton;
 	
 	public GUI() {
 		cellGrid = new CellGrid();
-		setLayout(new GridLayout(25,25));
+		gridPanel = new JPanel(new GridLayout(25,25));
 		//display grid of cells in grid form, representing each cell as a button in the gui
 		for(int i = 0; i< cellGrid.getGrid().length; i++) {
 			for(int j = 0; j < cellGrid.getGrid()[0].length; j++) {
@@ -33,17 +35,18 @@ public class GUI extends JFrame {
 					
 				}
 				cellButton.setBackground(Color.YELLOW);
-				add(cellButton);
+				gridPanel.add(cellButton);
 				cellButton.addActionListener(new CellButtonListener(cellButton, cellGrid.getGrid()[i][j]));
 			}
 		}
+		add(gridPanel, BorderLayout.NORTH);
 		
 		//code block for control panel
 		startButton = new JButton("Start");
 		startButton.addActionListener(new StartButtonListener());
 		controlPanel = new JPanel(new FlowLayout());
 		controlPanel.add(startButton);
-		add(controlPanel);
+		add(controlPanel, BorderLayout.SOUTH);
 		
 		//
 		pack();
