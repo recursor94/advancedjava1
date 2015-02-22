@@ -1,5 +1,7 @@
 package gameoflife;
 
+import java.awt.GridLayout;
+
 import javax.swing.JFrame;
 
 public class GUI extends JFrame {
@@ -7,6 +9,7 @@ public class GUI extends JFrame {
 	
 	public GUI() {
 		cellGrid = new CellGrid();
+		setLayout(new GridLayout(25,25));
 	}
 
 }
