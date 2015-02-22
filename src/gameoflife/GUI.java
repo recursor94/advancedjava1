@@ -1,5 +1,6 @@
 package gameoflife;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +28,7 @@ public class GUI extends JFrame {
 					 cellButton = new JButton("-");
 					
 				}
+				cellButton.setBackground(Color.YELLOW);
 				add(cellButton);
 				cellButton.addActionListener(new CellButtonListener(cellButton, cellGrid.getGrid()[i][j]));
 			}
