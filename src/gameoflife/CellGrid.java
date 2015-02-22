@@ -136,7 +136,10 @@ public class CellGrid {
 
 		//
 		//tests for getNeighbors method
-		
+		for(int i = 0; i < grid.getNeighbors(cell).length; i++) {
+			System.out.println(grid.getNeighbors(cell)[i]);
+
+		}
 		//
 		
 	}
