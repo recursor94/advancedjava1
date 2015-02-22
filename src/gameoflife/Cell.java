@@ -1,13 +1,22 @@
 package gameoflife;
 
-import java.util.ArrayList;
 
 public class Cell {
-	boolean isAlive; //calculates whether cell is alive
+	private boolean isAlive; //calculates whether cell is alive
 	
 	public Cell() {
-		isAlive = false;
+		setAlive(false);
 	}
+
+	public boolean isAlive() {
+		return isAlive;
+	}
+
+	public void setAlive(boolean isAlive) {
+		this.isAlive = isAlive;
+	}
+	
+	
 	
 	
 }
