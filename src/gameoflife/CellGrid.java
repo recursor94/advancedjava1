@@ -76,9 +76,19 @@ public class CellGrid {
 		 */
 	
 		int i =0, j = 0;
-		while(grid[i][j] != cell) {
+		while(i < grid.length && grid[i][j] != cell) {
+			System.out.println(i);
+			while(j < grid[0].length && grid[i][j] != cell) {
+				System.out.println(j);
+
+				j++;
+			}
+			System.out.println("End inner loop");
+			j=0;
+
 			i++;
-			j++;
+			System.out.println("I: " + i);
+			
 		}
 		
 		int index[] = new int[2];
@@ -110,11 +120,26 @@ public class CellGrid {
 		return neighbors;
 	}
 	
+	public Cell getCell(int rowIndex, int columnIndex) {
+		/*
+		 * get the cell in the grid at the specified row and column
+		 */
+		return grid[rowIndex][columnIndex];
+	}
+	
 	public static void main(String[] args) {
 		/*
 		 * FOR TESTING PURPOSES ONLY
 		 */
+		//test getindex method
 		CellGrid grid = new CellGrid();
+		Cell cell = grid.getCell(0, 0);
+		System.out.println(grid.getIndexOfCell(cell)[0]+ ", " + grid.getIndexOfCell(cell)[1]);
+		cell = grid.getCell(21, 3);
+		System.out.println("(21, 3) "+ grid.getIndexOfCell(cell)[0]+ ", " + grid.getIndexOfCell(cell)[1]);
+
+		//
+		
 	}
 	 
 
