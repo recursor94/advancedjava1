@@ -26,7 +26,46 @@ public class CellGrid {
 		/*Determines whether the cell is on the top border
 		 * in which case it's neighbors must be the cells on the bottom border
 		 */
+		int[] cellIndex = getIndexOfCell(cell);
+		if(cellIndex[0] -1 <0) {
+			return true;
+		}
 		
+		return false;
+	}
+	
+	public boolean cellisOnBottomBorder(Cell cell) {
+		/*Determines whether the cell is on the bottom border
+		 * in which case it's neighbors must be the cells on the top border
+		 */
+		int[] cellIndex = getIndexOfCell(cell);
+		if(cellIndex[0] +1 >= grid.length) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean cellisOnLeftBorder(Cell cell) {
+		/*Determines whether the cell is on the left border
+		 * in which case it's neighbors must be the cells on the right border
+		 */
+		int[] cellIndex = getIndexOfCell(cell);
+		if(cellIndex[1] -1 < 0) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean cellisOnRightBorder(Cell cell) {
+		/*Determines whether the cell is on the top border
+		 * in which case it's neighbors must be the cells on the left border
+		 */
+		int[] cellIndex = getIndexOfCell(cell);
+		if(cellIndex[1] +1 >= grid[0].length) {
+			return true;
+		}
 		
 		return false;
 	}
