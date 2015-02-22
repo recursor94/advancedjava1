@@ -90,6 +90,11 @@ public class CellGrid {
 		
 	}
 	
+	public Cell []getNeighbors() {
+		Cell[] neighbors = new Cell[8];
+		return neighbors;
+	}
+	
 	 
 
 }
