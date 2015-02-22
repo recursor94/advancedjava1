@@ -79,10 +79,21 @@ public class GUI extends JFrame {
 	}
 	
 	private class StartButtonListener implements ActionListener{
+		private boolean isRunning; //keeps track of whether simulation is or isn't running, and sets behavior to begin or end it accordingly
 
+		private StartButtonListener() {
+			isRunning = false;
+		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+			if(!isRunning) {
+				isRunning = true;
+				startButton.setText("Stop");
+			}
+			else {
+				isRunning = false;
+				startButton.setText("Start");
+			}
 			
 		}
 		
