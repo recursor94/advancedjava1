@@ -90,8 +90,23 @@ public class CellGrid {
 		
 	}
 	
-	public Cell []getNeighbors() {
+	public Cell []getNeighbors(Cell cell) {
+		/*
+		 * Returns a one dimensional array containing all eight cells neighboring the given cell
+		 * Taking into account that cells on the border are neighboring cells on the opposite border
+		 */
+		int[] indexOfCell = getIndexOfCell(cell);
 		Cell[] neighbors = new Cell[8];
+		neighbors[0] = grid[indexOfCell[0] + 1][indexOfCell[1]];
+		neighbors[1] = grid[indexOfCell[0] + 1][indexOfCell[1]];
+		neighbors[2] = grid[indexOfCell[0] + 1][indexOfCell[1]];
+		neighbors[3] = grid[indexOfCell[0] + 1][indexOfCell[1]];
+		neighbors[4] = grid[indexOfCell[0] + 1][indexOfCell[1]];
+		neighbors[5] = grid[indexOfCell[0] + 1][indexOfCell[1]];
+		neighbors[6] = grid[indexOfCell[0] + 1][indexOfCell[1]];
+		neighbors[7] = grid[indexOfCell[0] + 1][indexOfCell[1]];
+
+
 		return neighbors;
 	}
 	
