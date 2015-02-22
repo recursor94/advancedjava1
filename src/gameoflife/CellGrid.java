@@ -101,14 +101,14 @@ public class CellGrid {
 		 */
 		int[] indexOfCell = getIndexOfCell(cell);
 		Cell[] neighbors = new Cell[8];
-		neighbors[0] = grid[indexOfCell[0] + 1][indexOfCell[1]];
+		neighbors[0] = grid[indexOfCell[0] - 1][indexOfCell[1]];
 		neighbors[1] = grid[indexOfCell[0] + 1][indexOfCell[1]];
-		neighbors[2] = grid[indexOfCell[0] + 1][indexOfCell[1]];
-		neighbors[3] = grid[indexOfCell[0] + 1][indexOfCell[1]];
-		neighbors[4] = grid[indexOfCell[0] + 1][indexOfCell[1]];
-		neighbors[5] = grid[indexOfCell[0] + 1][indexOfCell[1]];
-		neighbors[6] = grid[indexOfCell[0] + 1][indexOfCell[1]];
-		neighbors[7] = grid[indexOfCell[0] + 1][indexOfCell[1]];
+		neighbors[2] = grid[indexOfCell[0]][indexOfCell[1] - 1];
+		neighbors[3] = grid[indexOfCell[0]][indexOfCell[1]+1];
+		neighbors[4] = grid[indexOfCell[0] -1][indexOfCell[1]-1];
+		neighbors[5] = grid[indexOfCell[0] - 1][indexOfCell[1] +1];
+		neighbors[6] = grid[indexOfCell[0] + 1][indexOfCell[1]-1];
+		neighbors[7] = grid[indexOfCell[0] + 1][indexOfCell[1]+1];
 
 
 		return neighbors;
@@ -131,6 +131,7 @@ public class CellGrid {
 		System.out.println(grid.getIndexOfCell(cell)[0]+ ", " + grid.getIndexOfCell(cell)[1]);
 		cell = grid.getCell(21, 3);
 		System.out.println("(21, 3) "+ grid.getIndexOfCell(cell)[0]+ ", " + grid.getIndexOfCell(cell)[1]);
+		
 
 		//
 		
