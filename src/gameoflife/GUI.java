@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class GUI extends JFrame {
 	private CellGrid cellGrid;
@@ -17,7 +18,7 @@ public class GUI extends JFrame {
 	private JPanel gridPanel; //panel for the cell grid, main contentpane should be border layout so it can accommodate both panels
 	private JButton startButton;
 	private boolean isRunning; //keeps track of whether simulation is or isn't running, and sets button behavior to begin or end it accordingly
-	
+	private Timer generationTimer; //Timer that controls delay between each generation
 	public GUI() {
 		cellGrid = new CellGrid();
 		gridPanel = new JPanel(new GridLayout(25,25));
