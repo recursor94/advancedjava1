@@ -1,15 +1,19 @@
 package gameoflife;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class GUI extends JFrame {
 	private CellGrid cellGrid;
+	private JPanel controlPanel; //panel for controlling the game, such as starting and stopping the simulation
+	private JButton startButton;
 	
 	public GUI() {
 		cellGrid = new CellGrid();
@@ -33,6 +37,15 @@ public class GUI extends JFrame {
 				cellButton.addActionListener(new CellButtonListener(cellButton, cellGrid.getGrid()[i][j]));
 			}
 		}
+		
+		//code block for control panel
+		startButton = new JButton("Start");
+		startButton.addActionListener(new StartButtonListener());
+		controlPanel = new JPanel(new FlowLayout());
+		controlPanel.add(startButton);
+		add(controlPanel);
+		
+		//
 		pack();
 		setVisible(true);
 	}
@@ -55,6 +68,16 @@ public class GUI extends JFrame {
 				cellButton.setText("0"); //set cell to alive if the user clicks on it during pre-game initialization
 				pack();
 			}
+			
+		}
+		
+	}
+	
+	private class StartButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
 			
 		}
 		
