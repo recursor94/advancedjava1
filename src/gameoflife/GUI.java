@@ -19,6 +19,7 @@ public class GUI extends JFrame {
 	private JButton startButton;
 	private boolean isRunning; //keeps track of whether simulation is or isn't running, and sets button behavior to begin or end it accordingly
 	private Timer generationTimer; //Timer that controls delay between each generation
+	private int generationDelay; //value controls the milliseconds between each successive generation
 	public GUI() {
 		cellGrid = new CellGrid();
 		gridPanel = new JPanel(new GridLayout(25,25));
@@ -55,6 +56,11 @@ public class GUI extends JFrame {
 		//
 		pack();
 		setVisible(true);
+		
+		//Timer and generation initializations
+		generationDelay = 1000;
+		generationTimer = new Timer(generationDelay, new GenerationTimerListener());
+		//
 	}
 	
 	private class CellButtonListener implements ActionListener {
@@ -88,15 +94,26 @@ public class GUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(!isRunning) {
+				generationTimer.start();
 				isRunning = true;
 				startButton.setText("Stop");
 			}
 			else {
+				generationTimer.stop();
 				isRunning = false;
 				startButton.setText("Start");
 				
 			}
 			
+		}
+		
+	}
+	
+	private class GenerationTimerListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("A new generation has been started");
 		}
 		
 	}
