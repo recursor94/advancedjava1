@@ -73,27 +73,21 @@ public class CellGrid {
 	public int [] getIndexOfCell(Cell cell) { 
 		/* arrays by default can not return the index of an element
 		 * which is necessary in this program
+		 * we *do* want this to be an equal by reference check, because we want to know the exact cell, not its value
 		 */
-	
-		int i =0, j = 0;
-		while(i < grid.length && grid[i][j] != cell) {
-			System.out.println(i);
-			while(j < grid[0].length && grid[i][j] != cell) {
-				System.out.println(j);
-
-				j++;
+		int index[] = new int[2];
+		for(int i = 0; i < grid.length; i++) {
+			for(int j = 0; j < grid.length; j++) {
+				if(grid[i][j] == cell) {
+					index[0] = i;
+					index[1] = j;
+					return index;
+				}
 			}
-			System.out.println("End inner loop");
-			j=0;
-
-			i++;
-			System.out.println("I: " + i);
-			
 		}
 		
-		int index[] = new int[2];
-		index[0] = i;
-		index[1] = j;
+	
+		
 		return index;
 		
 		//TODO: Need to add test case for if the element is not in the grid, which should actually never happen
