@@ -89,14 +89,25 @@ public class GUI extends JFrame {
 			if(!isRunning) {
 				isRunning = true;
 				startButton.setText("Stop");
+				startSimulation();
 			}
 			else {
 				isRunning = false;
 				startButton.setText("Start");
+				endSimulation();
 			}
 			
 		}
 		
+	}
+	
+	public void startSimulation() {
+		/* Starts the simulation */
+		
+	}
+	
+	public void endSimulation() {
+		/* Ends the simulation */
 	}
 	
 	public static void main(String[] args) {
