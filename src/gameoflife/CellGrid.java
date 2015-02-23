@@ -114,11 +114,32 @@ public class CellGrid {
 		return neighbors;
 	}
 	
+	public int getNumberOfNeighborsAlive(Cell cell) {
+		Cell[] neighbors = getNeighbors(cell);
+		int aliveCount = 0;
+		for(Cell c: neighbors) {
+			if(c.isAlive()) {
+				aliveCount++;
+			}
+		}
+		return aliveCount;
+	}
+	
 	public Cell getCell(int rowIndex, int columnIndex) {
 		/*
 		 * get the cell in the grid at the specified row and column
 		 */
 		return grid[rowIndex][columnIndex];
+	}
+	
+	public void calculateGeneration() {
+		for(int i = 0; i < grid.length; i++) {
+			for(int j = 0; j < grid[0].length; j++) {
+				if(getNumberOfNeighborsAlive(grid[i][j]) != 2 || getNumberOfNeighborsAlive(grid[i][j]) != 3 ) {
+					grid[i][j].setAlive(false);
+				}
+			}
+		}
 	}
 		
 	public static void main(String[] args) {
