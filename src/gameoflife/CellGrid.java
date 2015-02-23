@@ -161,7 +161,8 @@ public class CellGrid {
 			System.out.println(grid.getNeighbors(cell)[i]);
 
 		}
-		//
+		//tests for getNumbersOfNeighborsAlive method
+		System.out.println("Number of neighbors alive: " + grid.getNumberOfNeighborsAlive(cell));
 		
 	}
 	 
