@@ -202,7 +202,17 @@ public class CellGrid {
 		}
 		//tests for getNumbersOfNeighborsAlive method
 		System.out.println("Number of neighbors alive: " + grid.getNumberOfNeighborsAlive(cell));
+		//
 		
+		//Tests for border test
+		cell = grid.getCell(24, 24);
+		System.out.println(grid.cellisOnBottomBorder(cell));
+		System.out.println(grid.cellisOnRightBorder(cell));
+		
+		cell = grid.getCell(0,5);
+		System.out.println(grid.cellisOnTopBorder(cell));
+		System.out.println(grid.cellisOnLeftBorder(cell));
+		//
 	}
 	 
 
