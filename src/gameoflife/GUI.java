@@ -114,6 +114,8 @@ public class GUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("A new generation has been started");
+			cellGrid.calculateGeneration();
+			
 		}
 		
 	}
