@@ -1,7 +1,11 @@
 package gameoflife;
 
+import java.io.ObjectInputStream.GetField;
+
 public class CellGrid {
 	private Cell[][] grid; // grid representing rows and columns of cells
+	private int rowLength;
+	private int colLength;
 
 	public CellGrid() {
 		setGrid(new Cell[25][25]); // for this project, grid will be 25x25
@@ -11,6 +15,8 @@ public class CellGrid {
 				getGrid()[i][j] = new Cell();
 				System.out.println(getGrid()[i][j]);
 			}
+			setRowLength(getGrid().length);
+			setColLength(getGrid()[0].length);
 		}
 	}
 
@@ -88,14 +94,14 @@ public class CellGrid {
 		 */
 		if (rowIndex >= grid.length) {
 			rowIndex = 0;
-		} else if (rowIndex <= 0) {
+		} else if (rowIndex < 0) {
 			rowIndex = grid.length - 1;
 		}
 		if (columnIndex >= grid[0].length) {
 			columnIndex = 0;
 		}
 
-		else if (columnIndex <= 0) {
+		else if (columnIndex < 0) {
 			columnIndex = grid[0].length - 1;
 		}
 
@@ -106,16 +112,17 @@ public class CellGrid {
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
 				Cell cell = getCellAt(i, j);
+				int numberOfNeighborsAlive = getNumberOfNeighborsAlive(cell);
 				
-				if (cell.isAlive() && getNumberOfNeighborsAlive(cell) != 2
-						|| getNumberOfNeighborsAlive(cell) != 3) {
-					System.out.println("Kill cell: " + i + ", " + j);
+				if (cell.isAlive() && (numberOfNeighborsAlive != 2 && numberOfNeighborsAlive != 3)) {
+					System.out.println(numberOfNeighborsAlive);
 					cell.setAlive(false);
 				}
 				
 				else if(!cell.isAlive() && getNumberOfNeighborsAlive(cell) == 3) {
 					cell.setAlive(true);
 				}
+			
 			}
 		}
 	}
@@ -142,10 +149,30 @@ public class CellGrid {
 		// tests for getNumbersOfNeighborsAlive method
 		System.out.println("Number of neighbors alive: "
 				+ grid.getNumberOfNeighborsAlive(cell));
-		//
+		//testing neighbors
+		Cell test = grid.getCellAt(0,0);
+		for(Cell c: grid.getNeighbors(test)) {
+			System.out.println("[" + grid.getIndexOfCell(c)[0] + " , " + grid.getIndexOfCell(c)[1] + "]: " + c);
+		}
 
 		
 		//
+	}
+
+	public int getRowLength() {
+		return rowLength;
+	}
+
+	public void setRowLength(int rowLength) {
+		this.rowLength = rowLength;
+	}
+
+	public int getColLength() {
+		return colLength;
+	}
+
+	public void setColLength(int colLength) {
+		this.colLength = colLength;
 	}
 
 }

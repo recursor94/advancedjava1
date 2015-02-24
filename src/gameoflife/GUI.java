@@ -119,14 +119,15 @@ public class GUI extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("A new generation has been started");
 			cellGrid.calculateGeneration();
-			Cell[][] grid = cellGrid.getGrid();
-			for(int i = 0; i < grid.length; i++) {
-				for(int j = 0; j < grid[0].length; j++) {
-					if(!grid[i][j].isAlive()) {
-						buttonGrid[i][j].setText(" ");
+			for(int i = 0; i < cellGrid.getRowLength(); i++) {
+				for(int j = 0; j < cellGrid.getColLength(); j++) {
+					if(cellGrid.getCellAt(i, j).isAlive()) {
+						buttonGrid[i][j].setText(":)");
+
 					}
 					else {
-						buttonGrid[i][j].setText(":)");
+						buttonGrid[i][j].setText("  ");
+
 					}
 				}
 			}
