@@ -20,27 +20,30 @@ public class GUI extends JFrame {
 	private boolean isRunning; //keeps track of whether simulation is or isn't running, and sets button behavior to begin or end it accordingly
 	private Timer generationTimer; //Timer that controls delay between each generation
 	private int generationDelay; //value controls the milliseconds between each successive generation
+	private JButton[][] buttonGrid;
 	public GUI() {
 		cellGrid = new CellGrid();
 		gridPanel = new JPanel(new GridLayout(25,25));
 		//display grid of cells in grid form, representing each cell as a button in the gui
+		buttonGrid = new JButton[25][25];
 		for(int i = 0; i< cellGrid.getGrid().length; i++) {
 			for(int j = 0; j < cellGrid.getGrid()[0].length; j++) {
 				JButton cellButton = null;
 				if(cellGrid.getGrid()[i][j].isAlive()) {  /*in the current setup, this check will always return false, 
 												**But, it makes sense, and if another programmer ever decides to set cells to be alive by default, this will work as expected*/
-					 cellButton = new JButton("0");
+					 cellButton = new JButton(":)");
 					
 				}
 				
 				else{
-					 cellButton = new JButton("-");
+					 cellButton = new JButton("  ");
 					
 				}
 				cellButton.setBackground(Color.BLACK);
 				cellButton.setForeground(Color.GREEN);
 				gridPanel.add(cellButton);
 				cellButton.addActionListener(new CellButtonListener(cellButton, cellGrid.getGrid()[i][j]));
+				buttonGrid[i][j] = cellButton;
 			}
 		}
 		add(gridPanel, BorderLayout.NORTH);
@@ -56,6 +59,7 @@ public class GUI extends JFrame {
 		//
 		pack();
 		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//Timer and generation initializations
 		generationDelay = 1000;
@@ -74,11 +78,11 @@ public class GUI extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if(cell.isAlive()) { //Uninitialize cell if cell is alive and user clicks on it during pre-game initialization
 				cell.setAlive(false);
-				cellButton.setText("-");
+				cellButton.setText("  ");
 			}
 			else {
 				cell.setAlive(true);
-				cellButton.setText("0"); //set cell to alive if the user clicks on it during pre-game initialization
+				cellButton.setText(":)"); //set cell to alive if the user clicks on it during pre-game initialization
 				pack();
 			}
 			
@@ -115,7 +119,17 @@ public class GUI extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("A new generation has been started");
 			cellGrid.calculateGeneration();
-			
+			Cell[][] grid = cellGrid.getGrid();
+			for(int i = 0; i < grid.length; i++) {
+				for(int j = 0; j < grid[0].length; j++) {
+					if(!grid[i][j].isAlive()) {
+						buttonGrid[i][j].setText(" ");
+					}
+					else {
+						buttonGrid[i][j].setText(":)");
+					}
+				}
+			}
 		}
 		
 	}

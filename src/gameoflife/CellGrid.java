@@ -105,9 +105,16 @@ public class CellGrid {
 	public void calculateGeneration() {
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
-				if (getNumberOfNeighborsAlive(grid[i][j]) != 2
-						|| getNumberOfNeighborsAlive(grid[i][j]) != 3) {
-					grid[i][j].setAlive(false);
+				Cell cell = getCellAt(i, j);
+				
+				if (cell.isAlive() && getNumberOfNeighborsAlive(cell) != 2
+						|| getNumberOfNeighborsAlive(cell) != 3) {
+					System.out.println("Kill cell: " + i + ", " + j);
+					cell.setAlive(false);
+				}
+				
+				else if(!cell.isAlive() && getNumberOfNeighborsAlive(cell) == 3) {
+					cell.setAlive(true);
 				}
 			}
 		}
@@ -119,10 +126,10 @@ public class CellGrid {
 		 */
 		// test getindex method
 		CellGrid grid = new CellGrid();
-		Cell cell = grid.getCell(0, 0);
+		Cell cell = grid.getCellAt(0, 0);
 		System.out.println(grid.getIndexOfCell(cell)[0] + ", "
 				+ grid.getIndexOfCell(cell)[1]);
-		cell = grid.getCell(21, 3);
+		cell = grid.getCellAt(21, 3);
 		System.out.println("(21, 3) " + grid.getIndexOfCell(cell)[0] + ", "
 				+ grid.getIndexOfCell(cell)[1]);
 
