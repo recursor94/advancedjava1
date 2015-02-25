@@ -10,11 +10,14 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import javax.swing.JButton;
@@ -25,8 +28,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.plaf.FileChooserUI;
 
 public class GUI extends JFrame {
+	
 	private CellGrid cellGrid;
 	private JPanel controlPanel; //panel for controlling the game, such as starting and stopping the simulation
 	private JPanel gridPanel; //panel for the cell grid, main contentpane should be border layout so it can accommodate both panels
@@ -38,6 +45,7 @@ public class GUI extends JFrame {
 	private JMenuBar menuBar;
 	private JMenu fileMenu;
 	private JMenuItem saveItem;
+	private JMenuItem openFileItem;
 	public GUI() {
 		cellGrid = new CellGrid();
 		gridPanel = new JPanel(new GridLayout(25,25));
@@ -77,10 +85,13 @@ public class GUI extends JFrame {
 		menuBar = new JMenuBar();
 		fileMenu = new JMenu("File");
 		saveItem = new JMenuItem("Save");
+		openFileItem = new JMenuItem("Open");
+		fileMenu.add(openFileItem);
 		fileMenu.add(saveItem);
 		menuBar.add(fileMenu);
 		setJMenuBar(menuBar);
 		saveItem.addActionListener(new SaveItemListener());
+		openFileItem.addActionListener(new OpenFileItemListener());
 		
 		//
 		
@@ -182,17 +193,19 @@ public class GUI extends JFrame {
 	}
 	
 	private class SaveItemListener implements ActionListener{
-		private File saveFile;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
 			
-			JFileChooser saveFileChooser = new JFileChooser("save");
+			JFileChooser saveFileChooser = new JFileChooser("saves");
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("Game of Life Save File", ".gol");
+			saveFileChooser.setFileFilter(filter);
 			int choice = saveFileChooser.showSaveDialog(getContentPane());
 			
 			if(choice == JFileChooser.APPROVE_OPTION) {
-				saveFile = saveFileChooser.getSelectedFile();
-				save();
+				File saveFile = new File("saves/" + saveFileChooser.getSelectedFile().getName() + ".gol");
+				System.out.println(saveFile.getName());
+				save(saveFile);
 				
 			}
 			
@@ -200,25 +213,68 @@ public class GUI extends JFrame {
 		
 		
 		}
-		private void save() {
+		private void save(File saveFile) {
 			try {
 				FileOutputStream fileOutputStream = new FileOutputStream(saveFile);
-				BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
-				ObjectOutputStream objectOutputStream = new ObjectOutputStream(bufferedOutputStream);
-				objectOutputStream.close();
+				ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 				
 				objectOutputStream.writeObject(cellGrid);
+				objectOutputStream.close();
+				System.out.println("Success");
 			} catch (FileNotFoundException ex) {
 				
 				ex.printStackTrace();
 			} catch (IOException ex) {
-				// TODO Auto-generated catch block
 				ex.printStackTrace();
 			}
 			
 		}
 		
 		
+		
+		
+	}
+	private class OpenFileItemListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JFileChooser fileChooser = new JFileChooser("saves");
+			fileChooser.setFileFilter((new FileNameExtensionFilter("Game Of Life save file (.gol)", ".gol")));
+			int choice = fileChooser.showOpenDialog(getContentPane());
+			if(choice == JFileChooser.APPROVE_OPTION) {
+				openFile(fileChooser.getSelectedFile());
+			}
+			
+			
+
+		}
+		
+		private void openFile(File saveFile) {
+			try {
+				FileInputStream fileInputStream = new FileInputStream(saveFile);
+				ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+				try {
+					cellGrid = (CellGrid) objectInputStream.readObject();
+
+					objectInputStream.close();
+					fileInputStream.close();
+					for(int i = 0; i < cellGrid.getRowLength(); i++) {
+						for(int j = 0; j < cellGrid.getColLength(); j++) {
+							if(cellGrid.getCellAt(i, j).isAlive()) {
+								buttonGrid[i][j].setText(":)");
+							}
+						}
+					}
+					
+				} catch (ClassNotFoundException e) {
+										e.printStackTrace();
+				}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 	
 	
