@@ -135,18 +135,6 @@ public class GUI extends JFrame {
 		
 	}
 	
-	public void startSimulation() {
-		/* Starts the simulation */
-		while(true) {
-			System.out.println("Started simulation");
-		}
-		
-	}
-	
-	public void endSimulation() {
-		/* Ends the simulation */
-		System.out.println("Ended Simluation");
-	}
 	
 	public static void main(String[] args) {
 		GUI frame = new GUI();
