@@ -141,7 +141,7 @@ public class GUI extends JFrame {
 
 						}
 						else {
-							buttonGrid[i][j].setText(";)");
+							buttonGrid[i][j].setText(";(");
 						}
 
 					}
