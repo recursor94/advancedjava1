@@ -187,14 +187,20 @@ public class GUI extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			
 			
-			JFileChooser saveFileChooser = new JFileChooser("./save");
+			JFileChooser saveFileChooser = new JFileChooser("save");
 			int choice = saveFileChooser.showSaveDialog(getContentPane());
 			
 			if(choice == JFileChooser.APPROVE_OPTION) {
 				saveFile = saveFileChooser.getSelectedFile();
+				save();
+				
 			}
 			
 			
+		
+		
+		}
+		private void save() {
 			try {
 				FileOutputStream fileOutputStream = new FileOutputStream(saveFile);
 				BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
@@ -209,8 +215,9 @@ public class GUI extends JFrame {
 				// TODO Auto-generated catch block
 				ex.printStackTrace();
 			}
-		
+			
 		}
+		
 		
 	}
 	
