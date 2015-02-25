@@ -13,10 +13,13 @@ public class Cell {
 	}
 	
 	public void kill() {
+		//kills the cell, better than set alive because of increased clarity
 		isAlive = false;
 	}
 	
 	public void revive() {
+		//revives the cell, better than set alive because of increased clarity
+
 		isAlive = true;
 	}
 	
