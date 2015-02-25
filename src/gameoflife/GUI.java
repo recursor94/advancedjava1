@@ -118,7 +118,10 @@ public class GUI extends JFrame {
 	}
 	
 	private class GenerationTimerListener implements ActionListener {
-
+		private boolean isAnimationPulse; //boolean to test whether animation is at pulse.
+		private GenerationTimerListener() {
+			setAnimationPulse(false);
+		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("A new generation has been started");
@@ -126,7 +129,15 @@ public class GUI extends JFrame {
 			for(int i = 0; i < cellGrid.getRowLength(); i++) {
 				for(int j = 0; j < cellGrid.getColLength(); j++) {
 					if(cellGrid.getCellAt(i, j).isAlive()) {
-						buttonGrid[i][j].setText(":)");
+						System.out.println("Animation Step: " + isAnimationPulse);
+						if(isAnimationPulse()) {
+							buttonGrid[i][j].setText(":)");
+							
+
+						}
+						else {
+							buttonGrid[i][j].setText(";)");
+						}
 
 					}
 					else {
@@ -135,6 +146,13 @@ public class GUI extends JFrame {
 					}
 				}
 			}
+			setAnimationPulse(!isAnimationPulse()); //opposite of whether on animation or not
+		}
+		public boolean isAnimationPulse() {
+			return isAnimationPulse;
+		}
+		public void setAnimationPulse(boolean isAnimationPulse) {
+			this.isAnimationPulse = isAnimationPulse;
 		}
 		
 	}
