@@ -8,10 +8,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.MenuBar;
-import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -75,6 +79,7 @@ public class GUI extends JFrame {
 		fileMenu.add(saveItem);
 		menuBar.add(fileMenu);
 		setJMenuBar(menuBar);
+		saveItem.addActionListener(new SaveItemListener());
 		
 		//
 		
@@ -171,6 +176,29 @@ public class GUI extends JFrame {
 		}
 		public void setAnimationPulse(boolean isAnimationPulse) {
 			this.isAnimationPulse = isAnimationPulse;
+		}
+		
+	}
+	
+	private class SaveItemListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			try {
+				FileOutputStream fileOutputStream = new FileOutputStream(new File("poop.sav"));
+				BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
+				ObjectOutputStream objectOutputStream = new ObjectOutputStream(bufferedOutputStream);
+				
+				objectOutputStream.writeObject(cellGrid);
+			} catch (FileNotFoundException ex) {
+				
+				ex.printStackTrace();
+			} catch (IOException ex) {
+				// TODO Auto-generated catch block
+				ex.printStackTrace();
+			}
+		
 		}
 		
 	}

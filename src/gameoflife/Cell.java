@@ -3,8 +3,10 @@
 //Description: Contains the alive state of an individual cell
 package gameoflife;
 
+import java.io.Serializable;
 
-public class Cell {
+
+public class Cell implements Serializable{
 	private boolean isAlive; //calculates whether cell is alive
 	
 	public Cell() {
