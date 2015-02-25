@@ -60,6 +60,11 @@ public class GUI extends JFrame {
 		controlPanel.setBackground(Color.WHITE);
 		add(controlPanel, BorderLayout.SOUTH);
 		
+		//Now for menu bar
+		
+		
+		//
+		
 		//
 		pack();
 		setVisible(true);

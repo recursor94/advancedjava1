@@ -4,8 +4,9 @@
 package gameoflife;
 
 import java.io.ObjectInputStream.GetField;
+import java.io.Serializable;
 
-public class CellGrid {
+public class CellGrid implements Serializable{
 	private Cell[][] grid; // grid representing rows and columns of cells
 	private int rowLength;
 	private int colLength;
