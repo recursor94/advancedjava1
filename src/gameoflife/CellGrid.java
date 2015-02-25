@@ -1,3 +1,6 @@
+//Filename: CellGrid.java
+//Author: Andrew Spano
+//Description: Class representing the grid of cells for the game of life project
 package gameoflife;
 
 import java.io.ObjectInputStream.GetField;

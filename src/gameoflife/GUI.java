@@ -1,3 +1,7 @@
+//Filename:GUI.java
+//Author:Andrew Spano
+//Description: Contains code for the gui of the game of life program
+
 package gameoflife;
 
 import java.awt.BorderLayout;

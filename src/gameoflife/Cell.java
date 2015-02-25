@@ -1,3 +1,6 @@
+//Filename: Cell.java
+//Author: Andrew Spano
+//Description: Contains the alive state of an individual cell
 package gameoflife;
 
 
