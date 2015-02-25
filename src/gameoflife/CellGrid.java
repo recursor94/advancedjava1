@@ -116,11 +116,11 @@ public class CellGrid {
 				
 				if (cell.isAlive() && (numberOfNeighborsAlive != 2 && numberOfNeighborsAlive != 3)) {
 					System.out.println(numberOfNeighborsAlive);
-					cell.setAlive(false);
+					cell.kill();
 				}
 				
 				else if(!cell.isAlive() && getNumberOfNeighborsAlive(cell) == 3) {
-					cell.setAlive(true);
+					cell.revive();
 				}
 			
 			}

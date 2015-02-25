@@ -5,15 +5,19 @@ public class Cell {
 	private boolean isAlive; //calculates whether cell is alive
 	
 	public Cell() {
-		setAlive(false);
+		isAlive = false;
 	}
 
 	public boolean isAlive() {
 		return isAlive;
 	}
-
-	public void setAlive(boolean isAlive) {
-		this.isAlive = isAlive;
+	
+	public void kill() {
+		isAlive = false;
+	}
+	
+	public void revive() {
+		isAlive = true;
 	}
 	
 	@Override

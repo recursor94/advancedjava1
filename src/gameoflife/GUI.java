@@ -77,11 +77,11 @@ public class GUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(cell.isAlive()) { //Uninitialize cell if cell is alive and user clicks on it during pre-game initialization
-				cell.setAlive(false);
+				cell.kill();
 				cellButton.setText("  ");
 			}
 			else {
-				cell.setAlive(true);
+				cell.revive();
 				cellButton.setText(":)"); //set cell to alive if the user clicks on it during pre-game initialization
 				pack();
 			}
