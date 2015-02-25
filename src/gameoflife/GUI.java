@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -181,14 +182,24 @@ public class GUI extends JFrame {
 	}
 	
 	private class SaveItemListener implements ActionListener{
-
+		private File saveFile;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
+			
+			JFileChooser saveFileChooser = new JFileChooser("./save");
+			int choice = saveFileChooser.showSaveDialog(getContentPane());
+			
+			if(choice == JFileChooser.APPROVE_OPTION) {
+				saveFile = saveFileChooser.getSelectedFile();
+			}
+			
+			
 			try {
-				FileOutputStream fileOutputStream = new FileOutputStream(new File("poop.sav"));
+				FileOutputStream fileOutputStream = new FileOutputStream(saveFile);
 				BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
 				ObjectOutputStream objectOutputStream = new ObjectOutputStream(bufferedOutputStream);
+				objectOutputStream.close();
 				
 				objectOutputStream.writeObject(cellGrid);
 			} catch (FileNotFoundException ex) {
