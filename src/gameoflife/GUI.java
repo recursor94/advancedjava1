@@ -8,11 +8,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.MenuBar;
+import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -25,6 +30,9 @@ public class GUI extends JFrame {
 	private Timer generationTimer; //Timer that controls delay between each generation
 	private int generationDelay; //value controls the milliseconds between each successive generation
 	private JButton[][] buttonGrid;
+	private JMenuBar menuBar;
+	private JMenu fileMenu;
+	private JMenuItem saveItem;
 	public GUI() {
 		cellGrid = new CellGrid();
 		gridPanel = new JPanel(new GridLayout(25,25));
@@ -61,7 +69,12 @@ public class GUI extends JFrame {
 		add(controlPanel, BorderLayout.SOUTH);
 		
 		//Now for menu bar
-		
+		menuBar = new JMenuBar();
+		fileMenu = new JMenu("File");
+		saveItem = new JMenuItem("Save");
+		fileMenu.add(saveItem);
+		menuBar.add(fileMenu);
+		setJMenuBar(menuBar);
 		
 		//
 		
