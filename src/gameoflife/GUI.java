@@ -259,9 +259,17 @@ public class GUI extends JFrame {
 					fileInputStream.close();
 					for(int i = 0; i < cellGrid.getRowLength(); i++) {
 						for(int j = 0; j < cellGrid.getColLength(); j++) {
+							for(ActionListener a: buttonGrid[i][j].getActionListeners()) {
+								a = null;
+							}
+							buttonGrid[i][j].addActionListener(new CellButtonListener(buttonGrid[j][j], cellGrid.getCellAt(i, j)));							
 							if(cellGrid.getCellAt(i, j).isAlive()) {
 								buttonGrid[i][j].setText(":)");
 								pack();
+							}
+							
+							else {
+								buttonGrid[i][j].setText("  ");
 							}
 						}
 					}
