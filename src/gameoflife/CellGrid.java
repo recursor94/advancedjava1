@@ -18,8 +18,8 @@ public class CellGrid {
 				grid[i][j] = new Cell();
 				System.out.println(grid[i][j]);
 			}
-			setRowLength(grid.length);
-			setColLength(grid[0].length);
+			rowLength = grid.length;  
+			colLength = grid[0].length; //neither of these will be modified after instantiation, so they don't need a mutator
 		}
 	}
 
