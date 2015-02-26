@@ -102,12 +102,12 @@ public class GUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(!isRunning) {
-				generationTimer.start();
+				startSimulation();
 				isRunning = true;
 				startButton.setText("Stop");
 			}
 			else {
-				generationTimer.stop();
+				pauseSimulation();
 				isRunning = false;
 				startButton.setText("Start");
 				
@@ -139,6 +139,20 @@ public class GUI extends JFrame {
 		
 	}
 	
+	public void startSimulation() {
+		/*
+		 * abstracts out timer starting logic, and makes it clearer to the programmer what the start button code is doing
+		 * Also makes it easy to change exactly how and what starting the simulation means.
+		 */
+		generationTimer.start();
+	}
+	public void pauseSimulation() {
+		/*
+		 * abstracts out timer pausing logic, and makes it clearer to the programmer what the start button code is doing
+		 * Also makes it easy to change exactly how and what pausing the simulation means.
+		 */
+		generationTimer.stop();
+	}
 	
 	public static void main(String[] args) {
 		GUI frame = new GUI();
