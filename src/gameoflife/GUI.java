@@ -238,7 +238,7 @@ public class GUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JFileChooser fileChooser = new JFileChooser("saves");
-			fileChooser.setFileFilter((new FileNameExtensionFilter("Game Of Life save file (.gol)", ".gol")));
+			fileChooser.setFileFilter((new FileNameExtensionFilter("Game Of Life save file (.gol)", "gol")));
 			int choice = fileChooser.showOpenDialog(getContentPane());
 			if(choice == JFileChooser.APPROVE_OPTION) {
 				openFile(fileChooser.getSelectedFile());
