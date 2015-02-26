@@ -30,10 +30,10 @@ public class GUI extends JFrame {
 		gridPanel = new JPanel(new GridLayout(25,25));
 		//display grid of cells in grid form, representing each cell as a button in the gui
 		buttonGrid = new JButton[25][25];
-		for(int i = 0; i< cellGrid.getGrid().length; i++) {
-			for(int j = 0; j < cellGrid.getGrid()[0].length; j++) {
+		for(int i = 0; i< cellGrid.getRowLength(); i++) {
+			for(int j = 0; j < cellGrid.getColLength(); j++) {
 				JButton cellButton = null;
-				if(cellGrid.getGrid()[i][j].isAlive()) {  /*in the current setup, this check will always return false, 
+				if(cellGrid.getCellAt(i, j).isAlive()) {  /*in the current setup, this check will always return false, 
 												**But, it makes sense, and if another programmer ever decides to set cells to be alive by default, this will work as expected*/
 					 cellButton = new JButton(":)");
 					
@@ -46,7 +46,7 @@ public class GUI extends JFrame {
 				cellButton.setBackground(Color.BLACK);
 				cellButton.setForeground(Color.GREEN);
 				gridPanel.add(cellButton);
-				cellButton.addActionListener(new CellButtonListener(cellButton, cellGrid.getGrid()[i][j]));
+				cellButton.addActionListener(new CellButtonListener(cellButton, cellGrid.getCellAt(i, j)));
 				buttonGrid[i][j] = cellButton;
 			}
 		}

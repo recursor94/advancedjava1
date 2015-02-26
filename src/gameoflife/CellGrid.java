@@ -13,18 +13,14 @@ public class CellGrid {
 	public CellGrid() {
 		setGrid(new Cell[25][25]); // for this project, grid will be 25x25
 
-		for (int i = 0; i < getGrid().length; i++) {
-			for (int j = 0; j < getGrid()[0].length; j++) {
-				getGrid()[i][j] = new Cell();
-				System.out.println(getGrid()[i][j]);
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[0].length; j++) {
+				grid[i][j] = new Cell();
+				System.out.println(grid[i][j]);
 			}
-			setRowLength(getGrid().length);
-			setColLength(getGrid()[0].length);
+			setRowLength(grid.length);
+			setColLength(grid[0].length);
 		}
-	}
-
-	public Cell[][] getGrid() {
-		return grid;
 	}
 
 	public void setGrid(Cell[][] grid) {
