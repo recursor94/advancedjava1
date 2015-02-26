@@ -162,16 +162,8 @@ public class CellGrid {
 		return rowLength;
 	}
 
-	public void setRowLength(int rowLength) {
-		this.rowLength = rowLength;
-	}
-
 	public int getColLength() {
 		return colLength;
-	}
-
-	public void setColLength(int colLength) {
-		this.colLength = colLength;
 	}
 
 }
