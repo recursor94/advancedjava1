@@ -261,6 +261,7 @@ public class GUI extends JFrame {
 						for(int j = 0; j < cellGrid.getColLength(); j++) {
 							if(cellGrid.getCellAt(i, j).isAlive()) {
 								buttonGrid[i][j].setText(":)");
+								pack();
 							}
 						}
 					}
