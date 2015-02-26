@@ -122,7 +122,7 @@ public class GUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("A new generation has been started");
-			cellGrid.calculateGeneration();
+			cellGrid = cellGrid.getNextGeneration();
 			for(int i = 0; i < cellGrid.getRowLength(); i++) {
 				for(int j = 0; j < cellGrid.getColLength(); j++) {
 					if(cellGrid.getCellAt(i, j).isAlive()) {

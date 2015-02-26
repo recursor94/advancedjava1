@@ -107,10 +107,13 @@ public class CellGrid {
 		return grid[rowIndex][columnIndex];
 	}
 
-	public void calculateGeneration() {
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[0].length; j++) {
-				Cell cell = getCellAt(i, j);
+	public CellGrid getNextGeneration() {
+		
+		CellGrid nextGeneration = new CellGrid(); //store the new grid in a temporary array, that way number of neighbors alive do not change as the generation is being calculated
+		
+		for (int i = 0; i < getRowLength(); i++) {
+			for (int j = 0; j < getColLength(); j++) {
+				Cell cell = nextGeneration.getCellAt(i, j);
 				int numberOfNeighborsAlive = getNumberOfNeighborsAlive(cell);
 				
 				if (cell.isAlive() && (numberOfNeighborsAlive != 2 && numberOfNeighborsAlive != 3)) {
@@ -124,6 +127,8 @@ public class CellGrid {
 			
 			}
 		}
+		
+		return nextGeneration;
 	}
 
 	public static void main(String[] args) {
