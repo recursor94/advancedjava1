@@ -157,18 +157,4 @@ public class GUI extends JFrame {
 		generationTimer.stop();
 	}
 	
-	public static void main(String[] args) {
-		JLabel rowLabel = new JLabel("Number of Rows");
-		JLabel columnLabel = new JLabel("Number of Columns");
-		JTextField rowField = new JTextField(5);
-		JTextField columnField = new JTextField(5);
-		JPanel gridSizeChoicePanel = new JPanel();
-		gridSizeChoicePanel.add(rowLabel);
-		gridSizeChoicePanel.add(rowField);
-		gridSizeChoicePanel.add(columnLabel);
-		gridSizeChoicePanel.add(columnField);
-		JOptionPane.showMessageDialog(null, gridSizeChoicePanel, "Enter The size of the game grid (rows x columns)", JOptionPane.QUESTION_MESSAGE);
-		GUI frame = new GUI(Integer.parseInt(rowField.getText()), Integer.parseInt(columnField.getText()));
-	}
-
 }
