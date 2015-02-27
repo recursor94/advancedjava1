@@ -13,7 +13,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 public class GUI extends JFrame {
@@ -25,11 +28,11 @@ public class GUI extends JFrame {
 	private Timer generationTimer; //Timer that controls delay between each generation
 	private int generationDelay; //value controls the milliseconds between each successive generation
 	private JButton[][] buttonGrid;
-	public GUI() {
-		cellGrid = new CellGrid();
-		gridPanel = new JPanel(new GridLayout(25,25));
+	public GUI(int gridRowLength, int gridColLength) {
+		cellGrid = new CellGrid(gridRowLength, gridColLength);
+		gridPanel = new JPanel(new GridLayout(gridRowLength, gridColLength));
 		//display grid of cells in grid form, representing each cell as a button in the gui
-		buttonGrid = new JButton[25][25];
+		buttonGrid = new JButton[gridRowLength][gridColLength];
 		for(int i = 0; i< cellGrid.getRowLength(); i++) {
 			for(int j = 0; j < cellGrid.getColLength(); j++) {
 				JButton cellButton = null;
@@ -155,7 +158,17 @@ public class GUI extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		GUI frame = new GUI();
+		JLabel rowLabel = new JLabel("Number of Rows");
+		JLabel columnLabel = new JLabel("Number of Columns");
+		JTextField rowField = new JTextField(5);
+		JTextField columnField = new JTextField(5);
+		JPanel gridSizeChoicePanel = new JPanel();
+		gridSizeChoicePanel.add(rowLabel);
+		gridSizeChoicePanel.add(rowField);
+		gridSizeChoicePanel.add(columnLabel);
+		gridSizeChoicePanel.add(columnField);
+		JOptionPane.showMessageDialog(null, gridSizeChoicePanel, "Enter The size of the game grid (rows x columns)", JOptionPane.QUESTION_MESSAGE);
+		GUI frame = new GUI(Integer.parseInt(rowField.getText()), Integer.parseInt(columnField.getText()));
 	}
 
 }
