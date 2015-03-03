@@ -11,16 +11,16 @@ public class CellGrid implements Serializable{
 	private int rowLength;
 	private int colLength;
 
-	public CellGrid() {
-		setGrid(new Cell[25][25]); // for this project, grid will be 25x25
+	public CellGrid(int rowLength, int columnLength) {
+		setGrid(new Cell[rowLength][columnLength]); // for this project, grid will be 25x25
 
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
 				grid[i][j] = new Cell();
 				System.out.println(grid[i][j]);
 			}
-			rowLength = grid.length;  
-			colLength = grid[0].length; //neither of these will be modified after instantiation, so they don't need a mutator
+			this.rowLength = rowLength;
+			this.colLength = columnLength; //neither of these will be modified after instantiation, so they don't need a mutator
 		}
 	}
 
@@ -108,31 +108,56 @@ public class CellGrid implements Serializable{
 		return grid[rowIndex][columnIndex];
 	}
 
-	public void calculateGeneration() {
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[0].length; j++) {
+	public CellGrid getNextGeneration() {
+		
+		CellGrid nextGeneration = new CellGrid(getRowLength(), getColLength()); //store the new grid in a temporary array, that way number of neighbors alive do not change as the generation is being calculated
+		Cell[][] nextGrid = new Cell[rowLength][colLength];
+		for(int i = 0; i < nextGrid.length; i++) {
+			
+			for(int j = 0; j < nextGrid[0].length; j++) {
+				Cell temp = new Cell();
+				if(grid[i][j].isAlive()) {
+					temp.revive();
+				}
+				
+				else{
+					temp.kill();
+				}
+				nextGrid[i][j] = temp;
+				
+			}
+			
+		}
+		nextGeneration.setGrid(nextGrid);
+		for (int i = 0; i < getRowLength(); i++) {
+			for (int j = 0; j < getColLength(); j++) {
 				Cell cell = getCellAt(i, j);
+				Cell newCell = nextGeneration.getCellAt(i, j);
+				System.out.println("Cell in next generation: "+ i + ", " + j + " " +  cell);
 				int numberOfNeighborsAlive = getNumberOfNeighborsAlive(cell);
 				
 				if (cell.isAlive() && (numberOfNeighborsAlive != 2 && numberOfNeighborsAlive != 3)) {
 					System.out.println(numberOfNeighborsAlive);
-					cell.kill();
+					newCell.kill();
 				}
 				
 				else if(!cell.isAlive() && getNumberOfNeighborsAlive(cell) == 3) {
-					cell.revive();
+					newCell.revive();
 				}
 			
 			}
 		}
+		
+		return nextGeneration;
 	}
 
 	public static void main(String[] args) {
 		/*
 		 * FOR TESTING PURPOSES ONLY
 		 */
+		/*
 		// test getindex method
-		CellGrid grid = new CellGrid();
+		CellGrid grid = new CellGrid(this.getRowLength(), this.getColLength());
 		Cell cell = grid.getCellAt(0, 0);
 		System.out.println(grid.getIndexOfCell(cell)[0] + ", "
 				+ grid.getIndexOfCell(cell)[1]);
@@ -157,6 +182,8 @@ public class CellGrid implements Serializable{
 
 		
 		//
+		 
+		 */
 	}
 
 	public int getRowLength() {

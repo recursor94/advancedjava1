@@ -23,10 +23,16 @@ import java.io.ObjectOutputStream;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+<<<<<<< HEAD
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+=======
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+>>>>>>> master
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -46,11 +52,12 @@ public class GUI extends JFrame {
 	private JMenu fileMenu;
 	private JMenuItem saveItem;
 	private JMenuItem openFileItem;
-	public GUI() {
-		cellGrid = new CellGrid();
-		gridPanel = new JPanel(new GridLayout(25,25));
+
+	public GUI(int gridRowLength, int gridColLength) {
+		cellGrid = new CellGrid(gridRowLength, gridColLength);
+		gridPanel = new JPanel(new GridLayout(gridRowLength, gridColLength));
 		//display grid of cells in grid form, representing each cell as a button in the gui
-		buttonGrid = new JButton[25][25];
+		buttonGrid = new JButton[gridRowLength][gridColLength];
 		for(int i = 0; i< cellGrid.getRowLength(); i++) {
 			for(int j = 0; j < cellGrid.getColLength(); j++) {
 				JButton cellButton = null;
@@ -160,7 +167,7 @@ public class GUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("A new generation has been started");
-			cellGrid.calculateGeneration();
+			cellGrid = cellGrid.getNextGeneration();
 			for(int i = 0; i < cellGrid.getRowLength(); i++) {
 				for(int j = 0; j < cellGrid.getColLength(); j++) {
 					if(cellGrid.getCellAt(i, j).isAlive()) {
@@ -301,8 +308,4 @@ public class GUI extends JFrame {
 		generationTimer.stop();
 	}
 	
-	public static void main(String[] args) {
-		GUI frame = new GUI();
-	}
-
 }
