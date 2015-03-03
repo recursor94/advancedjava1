@@ -23,14 +23,9 @@ import java.io.ObjectOutputStream;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-<<<<<<< HEAD
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-=======
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
->>>>>>> master
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
