@@ -16,7 +16,7 @@ public class CellGrid implements Serializable{
 
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
-				grid[i][j] = new Cell();
+				grid[i][j] = new Cell(i, j);
 				System.out.println(grid[i][j]);
 			}
 			this.rowLength = rowLength;
@@ -28,30 +28,7 @@ public class CellGrid implements Serializable{
 		this.grid = grid;
 	}
 
-	public int[] getIndexOfCell(Cell cell) {
-		/*
-		 * arrays by default can not return the index of an element which is
-		 * necessary in this program we *do* want this to be an equal by
-		 * reference check, because we want to know the exact cell, not its
-		 * value
-		 */
-		int index[] = new int[2];
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid.length; j++) {
-				if (grid[i][j] == cell) {
-					index[0] = i;
-					index[1] = j;
-					return index;
-				}
-			}
-		}
 
-		return index;
-
-		// TODO: Need to add test case for if the element is not in the grid,
-		// which should actually never happen
-
-	}
 
 	public Cell []getNeighbors(Cell cell) {
 		/*
@@ -59,8 +36,8 @@ public class CellGrid implements Serializable{
 		 * Taking into account that cells on the border are neighboring cells on the opposite border
 		 */
 		Cell[] neighbors = new Cell[8];
-		int cellIndex[] = getIndexOfCell(cell);
-		neighbors[0] = getCellAt(cellIndex[0] + 1, cellIndex[1]);
+		int cellIndex[] = cell.getIndex();
+		neighbors[0] = getCellAt(cellIndex[0] + 1, cellIndex[1]);   //This gets all of the neighbors of the cell, including diagonals
 		neighbors[1] = getCellAt(cellIndex[0] - 1, cellIndex[1]);
 		neighbors[2] = getCellAt(cellIndex[0], cellIndex[1] + 1);
 		neighbors[3] = getCellAt(cellIndex[0], cellIndex[1] - 1);
@@ -68,10 +45,7 @@ public class CellGrid implements Serializable{
 		neighbors[5] = getCellAt(cellIndex[0]-1, cellIndex[1] -1);
 		neighbors[6] = getCellAt(cellIndex[0]+1, cellIndex[1] - 1);
 		neighbors[7] = getCellAt(cellIndex[0] -1 , cellIndex[1] + 1);
-
-
-
-
+		
 
 		return neighbors;
 	}
@@ -115,7 +89,7 @@ public class CellGrid implements Serializable{
 		for(int i = 0; i < nextGrid.length; i++) {
 			
 			for(int j = 0; j < nextGrid[0].length; j++) {
-				Cell temp = new Cell();
+				Cell temp = new Cell(i, j);
 				if(grid[i][j].isAlive()) {
 					temp.revive();
 				}

@@ -8,9 +8,13 @@ import java.io.Serializable;
 
 public class Cell implements Serializable{
 	private boolean isAlive; //calculates whether cell is alive
+	private int row;
+	private int col;
 	
-	public Cell() {
+	public Cell(int row, int col) {
 		isAlive = false;
+		this.row = row;
+		this.col = col;
 	}
 
 	public boolean isAlive() {
@@ -26,6 +30,10 @@ public class Cell implements Serializable{
 		//revives the cell, better than set alive because of increased clarity
 
 		isAlive = true;
+	}
+	public int [] getIndex() {
+		int []index = {row, col};
+		return index;
 	}
 	
 	@Override
