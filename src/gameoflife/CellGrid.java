@@ -112,8 +112,18 @@ public class CellGrid {
 		CellGrid nextGeneration = new CellGrid(getRowLength(), getColLength()); //store the new grid in a temporary array, that way number of neighbors alive do not change as the generation is being calculated
 		Cell[][] nextGrid = new Cell[rowLength][colLength];
 		for(int i = 0; i < nextGrid.length; i++) {
+			
 			for(int j = 0; j < nextGrid[0].length; j++) {
-				nextGrid[i][j] = grid[i][j];
+				Cell temp = new Cell();
+				if(grid[i][j].isAlive()) {
+					temp.revive();
+				}
+				
+				else{
+					temp.kill();
+				}
+				nextGrid[i][j] = temp;
+				
 			}
 			
 		}
