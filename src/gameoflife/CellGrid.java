@@ -15,7 +15,7 @@ public class CellGrid {
 
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
-				grid[i][j] = new Cell();
+				grid[i][j] = new Cell(i, j);
 				System.out.println(grid[i][j]);
 			}
 			this.rowLength = rowLength;
@@ -114,7 +114,7 @@ public class CellGrid {
 		for(int i = 0; i < nextGrid.length; i++) {
 			
 			for(int j = 0; j < nextGrid[0].length; j++) {
-				Cell temp = new Cell();
+				Cell temp = new Cell(i, j);
 				if(grid[i][j].isAlive()) {
 					temp.revive();
 				}
