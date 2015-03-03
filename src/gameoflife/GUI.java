@@ -33,7 +33,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.FileChooserUI;
 
-public class GUI extends JFrame {
+public class GUI extends JFrame{
 	
 	private CellGrid cellGrid;
 	private JPanel controlPanel; //panel for controlling the game, such as starting and stopping the simulation
@@ -47,12 +47,14 @@ public class GUI extends JFrame {
 	private JMenu fileMenu;
 	private JMenuItem saveItem;
 	private JMenuItem openFileItem;
+	private JMenu windowMenu;
+	private JMenuItem cloneGridToNewWindow;
 
-	public GUI(int gridRowLength, int gridColLength) {
-		cellGrid = new CellGrid(gridRowLength, gridColLength);
-		gridPanel = new JPanel(new GridLayout(gridRowLength, gridColLength));
+	public GUI(CellGrid cellGrid) {
+		this.cellGrid = cellGrid;
+		gridPanel = new JPanel(new GridLayout(cellGrid.getRowLength(), cellGrid.getColLength()));
 		//display grid of cells in grid form, representing each cell as a button in the gui
-		buttonGrid = new JButton[gridRowLength][gridColLength];
+		buttonGrid = new JButton[cellGrid.getRowLength()][cellGrid.getColLength()];
 		for(int i = 0; i< cellGrid.getRowLength(); i++) {
 			for(int j = 0; j < cellGrid.getColLength(); j++) {
 				JButton cellButton = null;
@@ -95,6 +97,12 @@ public class GUI extends JFrame {
 		saveItem.addActionListener(new SaveItemListener());
 		openFileItem.addActionListener(new OpenFileItemListener());
 		
+		windowMenu = new JMenu("Window");
+		cloneGridToNewWindow = new JMenuItem("Copy Grid to New Window");
+		cloneGridToNewWindow.addActionListener(new WindowCloneItemListener());
+		windowMenu.add(cloneGridToNewWindow);
+		menuBar.add(windowMenu);
+		
 		//
 		
 		//
@@ -108,6 +116,7 @@ public class GUI extends JFrame {
 		//
 	}
 	
+
 	private class CellButtonListener implements ActionListener {
 		private JButton cellButton;
 		private Cell cell;
@@ -287,6 +296,34 @@ public class GUI extends JFrame {
 		}
 
 	}
+	
+	
+	private class WindowCloneItemListener implements ActionListener {
+		private CellGrid gridCopy;
+		private GUI guiCopy;
+		
+		private WindowCloneItemListener() {
+			gridCopy = cellGrid;
+			
+			
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			/*try {
+				JFrame frameCopy = (JFrame) GUI.this.clone();
+				frameCopy.
+				System.out.println("Clone completed");
+				frameCopy.setVisible(true);
+			} catch (CloneNotSupportedException ex) {
+				ex.printStackTrace();
+			}*/
+			
+			guiCopy = new GUI(gridCopy);
+			
+		}
+		
+	}
+	
 	
 	public void startSimulation() {
 		/*

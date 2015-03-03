@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Main {
-	
+	CellGrid cellGrid;
 	GUI gameFrame;
 	
 	public static void main(String[] args) {
@@ -30,6 +30,7 @@ public class Main {
 		gridSizeChoicePanel.add(columnLabel);
 		gridSizeChoicePanel.add(columnField);
 		JOptionPane.showMessageDialog(null, gridSizeChoicePanel, "Enter The size of the game grid (rows x columns)", JOptionPane.QUESTION_MESSAGE);
-		gameFrame = new GUI(Integer.parseInt(rowField.getText()), Integer.parseInt(columnField.getText()));
+		cellGrid = new CellGrid(Integer.parseInt(rowField.getText()), Integer.parseInt(columnField.getText()));
+		gameFrame = new GUI(cellGrid);
 	}
 }
